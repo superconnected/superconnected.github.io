@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piano Flashcards</title>
+  <script src="./constants.js"></script>
+  <script src="./app.js"></script>
+  <script src="./index.js"></script>
+  <style type="text/css">
+    #container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20%;
+    }
+    #card {
+      font-size: 60px;
+    }
+    #start-over-button {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1 id="card"></h1>
+    <h4 id="message"></h4>
+    <button id="start-over-button" onclick="restart()">Start Over</button>
+  </div>
+</body>
+</html>
