@@ -38,7 +38,6 @@ class FlashcardApp {
       this.checkCurrent();
     } else if (cmd === NOTE_OFF) {
       this.notesOn.delete(NOTES.get(noteValue));
-      this.checkCurrent();
     }
   }
 
