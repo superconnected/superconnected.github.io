@@ -3,7 +3,9 @@ class FlashcardApp {
     this.notesOn = new Set();
     this.chords = [];
     this.chordIndex = 0;
-    this.timer = null;
+    this.timer = null; // individual chord timer
+    this.startTime = null; // overall app timer
+    this.stats = new Map();
 
     document.addEventListener('correct', () => {
       this.chordIndex++;
@@ -51,6 +53,7 @@ class FlashcardApp {
   }
 
   writeChord(chord) {
+    this.timer = Date.now();
     document.getElementById('card').innerText = chord;
   }
 
@@ -63,6 +66,7 @@ class FlashcardApp {
 
   checkCurrent() {
     if (this.isPlayingChord(this.currentChord)) {
+      this.stats.set(this.currentChord, Date.now() - this.timer);
       this.flashMessage('success!');
       document.dispatchEvent(new Event('correct'));
     }
@@ -71,7 +75,9 @@ class FlashcardApp {
   init() {
     this.chordIndex = 0;
     this.shuffleChords();
+    this.stats = new Map();
     document.getElementById('start-over-button').style.display = 'none';
+    document.getElementById('stats').style.display = 'none';
   }
 
   start() {
@@ -83,6 +89,21 @@ class FlashcardApp {
   end() {
     const seconds = (Date.now() - this.startTime) / 1000;
     this.writeChord(`finished in ${seconds} seconds!`);
-    document.getElementById('start-over-button').style.display = 'block';
+    document.getElementById('start-over-button').style.visibility = 'visible';
+
+    this.displayStats();
+  }
+
+  displayStats() {
+    function formatStat(stat) {
+      return `<li>${stat[0]}: ${stat[1] / 1000} seconds</li>`;
+    }
+
+    const sortedAsc = Array.from(this.stats).sort((a, b) => a[1] - b[1]);
+
+    document.getElementById('fast').innerHTML = sortedAsc.slice(0, 3).map(formatStat).join('');
+    document.getElementById('slow').innerHTML = sortedAsc.slice(-3).reverse().map(formatStat).join('');
+
+    document.getElementById('stats').style.visibility = 'hidden';
   }
 }

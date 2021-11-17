@@ -21,6 +21,16 @@
     #start-over-button {
       display: none;
     }
+    #stats {
+      display: flex;
+      flex-direction: row;
+    }
+    #stats > div {
+      margin: 0 10px;
+    }
+    ol {
+      padding-inline-start: 1em;
+    }
   </style>
 </head>
 <body>
@@ -28,6 +38,17 @@
     <h1 id="card"></h1>
     <h4 id="message"></h4>
     <button id="start-over-button" onclick="restart()">Start Over</button>
+
+    <div id="stats">
+      <div>
+        <h4>Fastest Chords</h4>
+        <ol id="fast"></ol>
+      </div>
+      <div>
+        <h4>Slowest Chords</h4>
+        <ol id="slow"></ol>
+      </div>
+    </div>
   </div>
 </body>
 </html>
