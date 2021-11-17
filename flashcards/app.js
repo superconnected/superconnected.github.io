@@ -34,7 +34,6 @@ class FlashcardApp {
 
   handleMIDIMessage(event) {
     const [cmd, noteValue] = event.data;
-    console.log(this.notesOn)
     if (cmd === NOTE_ON) {
       this.notesOn.add(NOTES.get(noteValue));
       this.checkCurrent();
