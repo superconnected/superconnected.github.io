@@ -76,7 +76,7 @@ class FlashcardApp {
     this.shuffleChords();
     this.stats = new Map();
     document.getElementById('start-over-button').style.display = 'none';
-    document.getElementById('stats').style.display = 'none';
+    document.getElementById('stats').style.visibility = 'hidden';
   }
 
   start() {
@@ -88,7 +88,7 @@ class FlashcardApp {
   end() {
     const seconds = (Date.now() - this.startTime) / 1000;
     this.writeChord(`finished in ${seconds} seconds!`);
-    document.getElementById('start-over-button').style.visibility = 'visible';
+    document.getElementById('start-over-button').style.display = 'block';
 
     this.displayStats();
   }
@@ -103,6 +103,6 @@ class FlashcardApp {
     document.getElementById('fast').innerHTML = sortedAsc.slice(0, 3).map(formatStat).join('');
     document.getElementById('slow').innerHTML = sortedAsc.slice(-3).reverse().map(formatStat).join('');
 
-    document.getElementById('stats').style.visibility = 'hidden';
+    document.getElementById('stats').style.visibility = 'visible';
   }
 }
